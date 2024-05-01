@@ -1,0 +1,3 @@
+<main>
+  <h1>Game Score</h1>
+</main>
