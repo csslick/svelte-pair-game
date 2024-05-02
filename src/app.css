@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -8,4 +10,24 @@ body {
   display: grid;
   place-items: center;
   height: 100vh;
+  background-image: url('images/game-title.jpg');
+  background-size: cover;
+  background-position: center;
+  font-family: system-ui, sans-serif;
+  text-align: center;
+}
+
+.itim-regular {
+  font-family: "Itim", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* 공통 텍스트 버튼 스타일 */
+.btn {
+  padding: 10px;
+  font-size: 32px;
+  background: transparent;
+  border: none;
+  &:hover { text-decoration: underline;}
 }

@@ -10,7 +10,7 @@
   <!-- paging logic -->
   {#if page === "title"}
     <section>
-      <h1>{title}</h1>
+      <h1 class='itim-regular'>{title}</h1>
       <div class="btn-group">
         <button 
           on:click={() => page ="play"}
@@ -23,6 +23,28 @@
   {:else if page === "play"}
     <GamePlay />
   {:else if page === "score"}
-    <GameScore />
+    <GameScore bind:page={page} />
   {/if}
 </main>
+
+<style lang="scss">
+  section {
+    h1 { 
+      font-size: 16vw; 
+      color: #ff3e00;
+      -webkit-text-stroke: 10px rgba(0,0,0, 0.5);
+      paint-order: stroke fill;
+    }
+  }
+  .btn-group {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    button { 
+      padding: 10px;
+      font-size: 32px;
+      background: transparent;
+      border: none;
+    }
+  }
+</style>

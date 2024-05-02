@@ -3,5 +3,5 @@
 
 </script>
 
-<GameTitle title="Pair Game!" />
+<GameTitle title="Pair Game" />
 
