@@ -26,13 +26,13 @@
       display: flex;
       justify-content: space-between;
       padding: 10px 30px;
-      dt { font-size: 3vw; }
-      dd { font-size: 3vw; }
+      dt { font-size: max(2vw, 24px); } // 가변 & 최대 크기 24px
+      dd { font-size: max(2vw, 24px); }
       // 글자 테두리 효과
       .round {
         color: #fff;
-        -webkit-text-stroke: 6px rgba(0,0,0, 1);
-        paint-order: stroke fill;
+        -webkit-text-stroke: 6px rgba(0,0,0, 1); // 텍스트 테두리 효과
+        paint-order: stroke fill; // 바깥쪽으로 선을 그림
       }
       .score, .time {
         color: #fff;

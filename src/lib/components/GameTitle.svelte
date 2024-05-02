@@ -45,6 +45,7 @@
       font-size: 32px;
       background: transparent;
       border: none;
+      &:hover { text-decoration: underline;}
     }
   }
 </style>
