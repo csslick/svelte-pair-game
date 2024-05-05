@@ -69,9 +69,13 @@
     { id: 7, flipped: false, matched: false },
   ]
 
-  // cards를 랜덤하게 섞기
+
+  // 카드 섞기 함수
   function shuffle() {
-    cards = cards.sort(() => Math.random() - 0.5);
+    stageClear = false; // 게임 클리어 상태 초기화
+    cards = cards.sort(() => Math.random() - 0.5); // cards를 랜덤하게 섞기
+
+    // 카드 상태 초기화
     cards.forEach(card => {
       card.flipped = false;
       card.matched = false;
@@ -95,6 +99,9 @@
 
   let pairArr = [null, null]; // 매칭된 카드 번호를 저장하는 배열
 
+  // 게임 클리어 상태변수
+  let stageClear = false; 
+
   // 카드 매칭 체크
   function checkMatch(i) {
     // 카드 위치가 다를 때만 추가
@@ -105,7 +112,7 @@
 
     // 카드 일치 판정
     if(
-      cards[pairArr[0]].id === cards[pairArr[1]].id 
+      cards[pairArr[0]]?.id === cards[pairArr[1]].id 
       &&
       cards[pairArr[0]]?.flipped // 카드가 열려있을 때만 판정
     ) {
@@ -113,13 +120,17 @@
       cards[pairArr[1]].matched = true;
     }
 
+    // 모든 카드의 짝을 찾으면 게임 클리어
+    stageClear = cards.every(card => card.matched === true);
+
     console.log(pairArr); 
-    console.log(cards[pairArr[0]], cards[pairArr[1]])
+    // console.log(cards[pairArr[0]], cards[pairArr[1]])
   } 
+
 
 </script>
 
-<h1>game grid</h1>
+<!-- <h1>game grid</h1> -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <ul class="game-grid">
@@ -135,7 +146,21 @@
     </li>
   {/each} 
 </ul>
-<button class='btn' on:click={shuffle}>reset</button>
+
+<!-- 게임 클리어 모달 창 -->
+{#if stageClear}
+  <div class="modal">
+    <div class="modal-container">
+      <h1>Game Clear!</h1>
+      <p class='bonus-score-title'>Bonus score</p>
+      <p class='bonus-score'>5,000</p>
+      <button class='btn next' on:click={shuffle}>Next</button>
+      <button class="btn" on:click={() => { 
+        // home으로 돌아가기
+      }}>Home</button>
+    </div>
+  </div>
+{/if}
 
 <style lang="scss">
   .game-grid {
@@ -169,5 +194,44 @@
     background-repeat: no-repeat;
     background-size: 30%;
     background-position: center;
+  }
+
+  // 모달창 스타일
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    display: grid;
+    place-items: center;
+
+    .modal-container {
+      background: #fff;
+      width: 400px;
+      padding: 20px;
+      border-radius: 30px;
+      border: 10px solid #000;
+      h1 { margin-bottom: 5px; }
+      .bonus-score-title {
+        font-size: 20px;
+        color: #666;
+      }
+      .bonus-score {
+        font-size: 36px;
+        color: #f63030;
+        margin-bottom: 20px;
+      }
+    }
+
+    .btn { 
+      font-size: 24px; 
+      &.next { color: #f63030; }
+    }
   }
 </style>
