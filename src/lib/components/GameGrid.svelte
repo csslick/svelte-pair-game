@@ -141,7 +141,7 @@
     >
       <img src={card_data[card.id].imgUrl} alt="" />
       <span style='position: absolute;'>
-        {card.id},{card.flipped},{card.matched}
+        <!-- {card.id},{card.flipped},{card.matched} -->
       </span>
     </li>
   {/each} 

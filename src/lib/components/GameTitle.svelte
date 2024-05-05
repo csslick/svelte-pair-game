@@ -1,9 +1,27 @@
 <script>
+  import { onDestroy } from "svelte"; // ① 앱 종료시 라이프사이클 훅(오디오 정리용)
+  import bgm from '../../assets/audio/bgm.mp3'; // ② bgm 추가
   import GamePlay from "./GamePlay.svelte";
   import GameScore from "./GameScore.svelte";
 
   export let title = "game title";
   let page = "title"; // title, play, score
+  let audio = new Audio(bgm); // ③ 오디오 객체 생성
+
+  // ④ 오디오 재생 함수
+  function playAudio() {
+    console.log('play audio');
+    audio.loop = true;
+    audio.volume = 0.8;
+    audio.play();
+  }
+
+  // ⑤ 컴포넌트 종료시 audio 객체 삭제
+  onDestroy(() => {
+    audio.pause();
+    audio = null;
+  });
+ 
 </script>
 
 <main>
@@ -13,7 +31,7 @@
       <h1 class='itim-regular'>{title}</h1>
       <div class="btn-group">
         <button 
-          on:click={() => page ="play"}
+          on:click={() => {page ="play"; playAudio()}}
         >Start</button>
         <button
           on:click={() => page="score"}
