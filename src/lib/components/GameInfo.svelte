@@ -2,15 +2,15 @@
   <dl>
     <div class='score'>
       <dt>Score</dt>
-      <dd>999,999</dd>
+      <dd>0</dd>
     </div>
     <div class='round'>
       <dt>Round</dt>
-      <dd>99</dd>
+      <dd>1</dd>
     </div>
     <div class='time'>
       <dt>Time</dt>
-      <dd>100</dd>
+      <dd>60</dd>
     </div>
   </dl>
 </header>

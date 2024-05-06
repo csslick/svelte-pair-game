@@ -1,18 +1,20 @@
 <script>
   import { onDestroy } from "svelte"; // ① 앱 종료시 라이프사이클 훅(오디오 정리용)
   import bgm from '../../assets/audio/bgm.mp3'; // ② bgm 추가
+  import soundSrcBtn from '../../assets/audio/btn.mp3'; // ③ 버튼 소리 추가
   import GamePlay from "./GamePlay.svelte";
   import GameScore from "./GameScore.svelte";
 
   export let title = "game title";
   let page = "title"; // title, play, score
   let audio = new Audio(bgm); // ③ 오디오 객체 생성
+  let btnSound = new Audio(soundSrcBtn); // ④ 버튼 소리 오디오 객체 생성
 
   // ④ 오디오 재생 함수
   function playAudio() {
     console.log('play audio');
     audio.loop = true;
-    audio.volume = 0.8;
+    audio.volume = 0.7;
     audio.play();
   }
 
@@ -31,10 +33,19 @@
       <h1 class='itim-regular'>{title}</h1>
       <div class="btn-group">
         <button 
-          on:click={() => {page ="play"; playAudio()}}
+          on:click={() => {
+            page ="play"; 
+            btnSound.play();
+            playAudio()
+          }}
         >Start</button>
         <button
-          on:click={() => page="score"}
+          on:click={
+            () => {
+              page="score";
+              btnSound.play();
+            }
+          }
         >Score</button>
       </div>
     </section>

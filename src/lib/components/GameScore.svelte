@@ -5,8 +5,8 @@
 <main>
   <h1 class="itim-regular">Game Score</h1>
   <div class="score">
-    <p class="hi-score">Hi score: <span>999,999,999</span></p>
-    <p class="your-score">Your score: <span>999,999,999</span></p>
+    <p class="hi-score">Hi score: <span>250,000</span></p>
+    <p class="your-score">Your score: <span>30,000</span></p>
   </div>
   <button 
     class="btn itim-regular" 

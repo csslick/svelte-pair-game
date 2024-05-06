@@ -1,4 +1,9 @@
 <script>
+  import soundSrcClick from '../../assets/audio/click.mp3'; // 클릭 소리 추가
+  import soundSrcMatch from '../../assets/audio/match.mp3'; // 매칭 소리 추가
+  let clickSound = new Audio(soundSrcClick); // ⑤ 클릭 소리 오디오 객체 생성
+  let matchSound = new Audio(soundSrcMatch); // ⑥ 매칭 소리 오디오 객체 생성
+
   // 카드정보 데이터
   const card_data = [
     {
@@ -69,7 +74,6 @@
     { id: 7, flipped: false, matched: false },
   ]
 
-
   // 카드 섞기 함수
   function shuffle() {
     stageClear = false; // 게임 클리어 상태 초기화
@@ -98,9 +102,7 @@
   }
 
   let pairArr = [null, null]; // 매칭된 카드 번호를 저장하는 배열
-
-  // 게임 클리어 상태변수
-  let stageClear = false; 
+  let stageClear = false; // 게임 클리어 상태변수
 
   // 카드 매칭 체크
   function checkMatch(i) {
@@ -118,6 +120,9 @@
     ) {
       cards[pairArr[0]].matched = true;
       cards[pairArr[1]].matched = true;
+      matchSound.currentTime = 0; // 다시 재생
+      matchSound.pause();
+      matchSound.play();
     }
 
     // 모든 카드의 짝을 찾으면 게임 클리어
@@ -127,7 +132,8 @@
     // console.log(cards[pairArr[0]], cards[pairArr[1]])
   } 
 
-
+  // 카드 섞기
+  shuffle();
 </script>
 
 <!-- <h1>game grid</h1> -->
@@ -136,7 +142,12 @@
 <ul class="game-grid">
   {#each cards as card, i}
     <li 
-      on:click={() => handleCard(i)}  
+      on:click={() => {
+        clickSound.currentTime = 0; // 다시 재생
+        clickSound.pause(); // 재생중지
+        clickSound.play();
+        handleCard(i)
+      }}  
       class={card.flipped || card.matched === true ? 'card' : 'card hidden'}
     >
       <img src={card_data[card.id].imgUrl} alt="" />
@@ -152,7 +163,7 @@
   <div class="modal">
     <div class="modal-container">
       <h1>Game Clear!</h1>
-      <p class='bonus-score-title'>Bonus score</p>
+      <p class='bonus-score-title'>Score</p>
       <p class='bonus-score'>5,000</p>
       <button class='btn next' on:click={shuffle}>Next</button>
       <button class="btn" on:click={() => { 
